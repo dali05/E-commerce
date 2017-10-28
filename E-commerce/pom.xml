@@ -14,8 +14,13 @@
 	</properties>
 
 	<dependencies>
+		<!-- Link backend project -->
+		<dependency>
+			<groupId>org.sid</groupId>
+			<artifactId>e_commercebackend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- JAVA EE API -->
-
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -37,7 +42,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<!-- JSTL -->
 		<dependency>
 			<groupId>jstl</groupId>
