@@ -42,32 +42,28 @@
 	<div class="wrapper">
 
 		<!-- Navigation -->
-		<%@include file="./shared/navbar.jsp"%>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top ">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="${contextRoot}/home">Home</a>
+				</div>
+			</div>
+		</nav>
+
 
 		<!-- Page Content -->
 		<div class="content">
-			<!-- Load only when user click Home -->
-			<c:if test="${userClickHome==true}">
-				<%@include file="home.jsp"%>
-			</c:if>
-			<!-- Load only when user click about -->
-			<c:if test="${userClickAbout==true}">
-				<%@include file="about.jsp"%>
-			</c:if>
-			<!-- Load only when user click Contact -->
-			<c:if test="${userClickContact==true}">
-				<%@include file="contact.jsp"%>
-			</c:if>
-			<!-- Load only when user click products -->
-			<c:if
-				test="${userClickAllProducts==true or userClickCategoryProducts==true }">
-				<%@include file="listProducts.jsp"%>
-			</c:if>
-			<!-- Load only when user click products -->
-			<c:if
-				test="${userClickShowProduct==true}">
-				<%@include file="singleProduit.jsp"%>
-			</c:if> 
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class=" mt-1 jumbotron text-center ">
+							<h1>${errorTitle}</h1>
+							<hr/>
+							<blockquote>${errorDescription}</blockquote>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<%@include file="./shared/footer.jsp"%>
