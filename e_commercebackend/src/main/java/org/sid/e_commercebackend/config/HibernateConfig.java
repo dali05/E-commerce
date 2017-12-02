@@ -54,7 +54,7 @@ public class HibernateConfig {
 		return builder.buildSessionFactory();
 
 	}
-
+	
 	// All the hibernate properties will be returned in this method
 	private Properties getHibernateProperties() {
 
@@ -63,8 +63,7 @@ public class HibernateConfig {
 		properties.put("hibernate.dialect", DATABASE_DIALECT);
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true");
-
-		// properties.put("hibernate.hbm2ddl.auto", "create");
+		properties.put("hibernate.hbm2ddl.auto", "update");
 
 		return properties;
 	}

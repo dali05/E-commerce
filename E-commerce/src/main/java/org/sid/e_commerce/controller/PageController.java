@@ -1,13 +1,20 @@
 package org.sid.e_commerce.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.sid.e_commerce.exception.ProductNotFoundExeption;
 import org.sid.e_commercebackend.beans.Categorie;
 import org.sid.e_commercebackend.beans.Produit;
 import org.sid.e_commercebackend.dao.CategorieDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.sid.e_commercebackend.dao.ProduitDAO;
 import org.slf4j.Logger;
@@ -103,5 +110,49 @@ public class PageController {
 		
 		return mv;
 	}
+	/*having similar mapping to flow id*/
+	@RequestMapping(value = { "/register" })
+	public ModelAndView register() {
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("title", "About Us");
+		return mv;
+	}
 	
+	
+	/*Login*/
+	@RequestMapping(value = { "/login" })
+	public ModelAndView login(@RequestParam(name="error", required=false) String error,
+			@RequestParam(name="logout", required=false) String logout
+			) {
+		ModelAndView mv = new ModelAndView("login");
+		if(error!=null) 
+			mv.addObject("message","Invalid Username and password");
+		
+		if(logout!=null) 
+			mv.addObject("logout","you are successfuly logged out");
+		
+		mv.addObject("title", "login");
+		return mv;
+	}
+	/*access denied*/
+	@RequestMapping(value="/access-denied")
+	public ModelAndView accessDenied() {
+		ModelAndView mv = new ModelAndView("error");		
+		mv.addObject("title", "403 Access Denied");
+		mv.addObject("errorTitle", "Aha! Caught You.");		
+		mv.addObject("errorDescription", "You are not authorized to view this page!");				
+		return mv;
+	}	
+
+	@RequestMapping(value="/perform-logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		// Invalidates HTTP Session, then unbinds any objects bound to it.
+	    // Removes the authentication from securitycontext 		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
+		
+		return "redirect:/login?logout";
+	}
 }

@@ -33,7 +33,7 @@ public class GlobalDefaultExceptionHandler {
 	public ModelAndView handlerException(Exception ex){
 		ModelAndView mv = new  ModelAndView("error");
 		mv.addObject("errorTitle","contact your administrator");
-		mv.addObject("errorDescription",ex.getCause());
+		mv.addObject("errorDescription",ex.getCause().toString());
 		mv.addObject("title","Error");
 		return mv;
 	}

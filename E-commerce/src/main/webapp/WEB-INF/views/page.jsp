@@ -16,9 +16,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="author" content="Mohamed Ali Laaroussi">
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 
-<title>My Car - ${title}</title>
+<title>My Shop - ${title}</title>
 <script>
 	window.menu = '${title}';
 	window.contextRoot = '${contextRoot}';
@@ -30,15 +32,16 @@
 <!-- DataTable bootstrap CSS -->
 <link href="${css}/dataTables.bootstrap4.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="${css}/myapp.css" rel="stylesheet">
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
+<!-- Custom styles for this template -->
+<link href="${css}/myapp.css" rel="stylesheet">
 
 </head>
 
 <body>
+   <div class="se-pre-con"></div>
 	<div class="wrapper">
 
 		<!-- Navigation -->
@@ -67,6 +70,11 @@
 			<c:if
 				test="${userClickShowProduct==true}">
 				<%@include file="singleProduit.jsp"%>
+			</c:if>
+			<!-- Load only when user click manage products -->
+			<c:if
+				test="${userClickManageProducts==true}">
+				<%@include file="manageProduct.jsp"%>
 			</c:if> 
 		</div>
 
@@ -74,19 +82,32 @@
 
 		<!-- jQuery -->
 		<script src="${js}/jquery.js"></script>
-
+		<!-- jQuery validate -->
+		<script src="${js}/jquery.validate.js"></script>
 		<!-- Bootstrap core JavaScript -->
 		<script src="${js}/bootstrap.min.js"></script>
-
+		
 		<!-- Data Tables plugin -->
 		<script src="${js}/jquery.dataTables.js"></script>
 
 		<!-- Data Tables bootstrap script -->
 		<script src="${js}/dataTables.bootstrap4.js"></script>
-
+		<script src="${js}/bootbox.min.js"></script>
 		<!-- My Js -->
 		<script src="${js}/myapp.js"></script>
 	</div>
+	
+	<script>
+
+	$(window).on("load", function () {
+		setTimeout(function() {
+			$(".se-pre-con").fadeOut("slow");
+		}, 500);			
+			
+		});
+		
+    </script>
+	
 </body>
 
 </html>

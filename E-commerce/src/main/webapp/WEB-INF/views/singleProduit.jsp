@@ -41,10 +41,11 @@
 				<h6>Qte.Available: ${produit.quantity}</h6>
 			</c:otherwise>
 		</c:choose>
+		<security:authorize access="isAnonymous() or hasAuthority('USER')">
 		<c:choose>
 			<c:when test="${produit.quantity<1}">
-					<a href="#"class="btn btn-success disabled"><strike>
-					<i class="fa fa-shopping-cart"></i>Addto cart</strike></a>
+					<a href="javascript:void(0)"class="btn btn-success disabled"><strike>
+					<i class="fa fa-shopping-cart"></i>Add to cart</strike></a>
 			</c:when>
 			<c:otherwise>
 				<a href="${contextRoot}/cart/add/${produit.id}/product"
@@ -53,9 +54,16 @@
 				</a>
 			</c:otherwise>
 		</c:choose>
+      </security:authorize>
+      <security:authorize access="hasAuthority('ADMIN')">
+      		<a href="${contextRoot}/admin/${produit.id}/product"
+					class="btn btn-warning"> <i class="fa fa-pencil"></i>
+					Edit
+				</a>
+      </security:authorize>
 
-
-		<a href="${contextRoot}/show/all/products" class="btn btn-success">Back
+		<a href="${contextRoot}/show/all/products" class="btn btn-warning">
+		Continue Shopping
 		</a>
 	</div>
 </div>
